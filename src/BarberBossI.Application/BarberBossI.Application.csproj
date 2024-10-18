@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\BebasNeue-Regular.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Black.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-BlackItalic.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Bold.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-BoldItalic.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Italic.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Light.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-LightItalic.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Medium.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-MediumItalic.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Regular.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+    <None Remove="UseCases\Invoices\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\BebasNeue-Regular.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-BlackItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Bold.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-BoldItalic.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Italic.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Light.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-LightItalic.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Medium.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-MediumItalic.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\Roboto-Regular.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Invoices\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="ClosedXML" Version="0.104.1" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="PDFsharp" Version="6.1.1" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarberBossI.Communication\BarberBossI.Communication.csproj" />
+    <ProjectReference Include="..\BarberBossI.Domain\BarberBossI.Domain.csproj" />
+    <ProjectReference Include="..\BarberBossI.Exception\BarberBossI.Exception.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logo\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Logo\ProfilePhoto.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
