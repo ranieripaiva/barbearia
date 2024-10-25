@@ -24,7 +24,8 @@ namespace BarberBossI.Exception {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ResourceErrorMessages {
         
-        private static global::System.Resources.ResourceManager resourceMan;        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
@@ -69,7 +70,43 @@ namespace BarberBossI.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoice not found.
+        ///   Looks up a localized string similar to This email is already in use..
+        /// </summary>
+        public static string EMAIL_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The email cannot be empty..
+        /// </summary>
+        public static string EMAIL_EMPTY {
+            get {
+                return ResourceManager.GetString("EMAIL_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The email is invalid..
+        /// </summary>
+        public static string EMAIL_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid e-mail and/or password..
+        /// </summary>
+        public static string EMAIL_OR_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense not found.
         /// </summary>
         public static string INVOICE_NOT_FOUND {
             get {
@@ -78,11 +115,29 @@ namespace BarberBossI.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoices cannot be for the future.
+        ///   Looks up a localized string similar to Expenses cannot be for the future.
         /// </summary>
         public static string INVOICES_CANNOT_FOR_THE_FUTURE {
             get {
                 return ResourceManager.GetString("INVOICES_CANNOT_FOR_THE_FUTURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password should be a minimum of 8 characters, containing at least one uppercase letter, one lowercase letter, one number, and one special character (e.g., !, ?, *, .)..
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name cannot be empty..
+        /// </summary>
+        public static string NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
             }
         }
         

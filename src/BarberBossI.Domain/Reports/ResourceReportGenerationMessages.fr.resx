@@ -150,4 +150,7 @@
   <data name="TOTAL_WON_IN" xml:space="preserve">
     <value>total gagné en {0}</value>
   </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>L'e-mail n'est pas valide.</value>
+  </data>
 </root>
