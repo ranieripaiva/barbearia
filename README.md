@@ -6,6 +6,7 @@ Este projeto é uma aplicação para uma barbearia que permite o registro e gere
 
 ### Funcionalidades Principais:
 - **Registro de Receitas**: Interface simples para registrar as receitas de serviços prestados e produtos vendidos.
+- **Registro de Despesas**: Interface simples para registrar as despesas de serviços prestados e aquisições. 
 - **Geração de Relatórios**: Os usuários podem gerar relatórios mensais em formatos Excel e PDF, facilitando a análise financeira.
 - **Banco de Dados MySQL**: Armazenamento eficiente das informações em um banco de dados MySQL, garantindo a integridade e acessibilidade dos dados.
 
