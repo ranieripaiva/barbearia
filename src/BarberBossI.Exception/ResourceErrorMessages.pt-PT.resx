@@ -150,4 +150,19 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>
+  <data name="TAG_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>Etiqueta não suportada.</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>O correio eletrónico é inválido.</value>
+  </data>
+  <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
+    <value>Despesa não encontrada.</value>
+  </data>
+  <data name="EXPENSES_CANNOT_FOR_THE_FUTURE" xml:space="preserve">
+    <value>As despesas não podem ser para o futuro.</value>
+  </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>A palavra-passe introduzida é diferente da palavra-passe atual.</value>
+  </data>
 </root>

@@ -1,0 +1,4 @@
+para add uma nova migrations é necessário executar o comando dentro da pasta source,
+
+comandos:
+		dotnet ef migrations add TagsIntoExpenses --project CashFlow.infraestructure --startup-project

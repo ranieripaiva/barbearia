@@ -1,6 +1,7 @@
 ﻿using BarberBossI.Domain.Extentions;
 using BarberBossI.Domain.Reports;
 using BarberBossI.Domain.Repositories.Invoices;
+using BarberBossI.Domain.Services.LoggedUser;
 using ClosedXML.Excel;
 
 namespace BarberBossI.Application.UseCases.Invoices.Reports.Excel;
@@ -8,14 +9,18 @@ public class GenerateInvoicesReportExcelUseCase : IGenerateInvoicesReportExcelUs
 {
     private const string CURRENCY_SYMBOL = "R$ ";
     private readonly IInvoicesReadOnlyRepository _repository;
+    private readonly ILoggedUser _loggedUser;
 
-    public GenerateInvoicesReportExcelUseCase(IInvoicesReadOnlyRepository repository)
+    public GenerateInvoicesReportExcelUseCase(IInvoicesReadOnlyRepository repository, ILoggedUser loggedUser)
     {
         _repository = repository;
+        _loggedUser = loggedUser;
     }
     public async Task<byte[]> Execute(DateOnly month)
     {
-        var invoices = await _repository.FilterByMonth(month);
+        var loggedUser = await _loggedUser.Get();
+
+        var invoices = await _repository.FilterByMonth(loggedUser, month);
 
         if (invoices.Count == 0)
         {
@@ -24,7 +29,7 @@ public class GenerateInvoicesReportExcelUseCase : IGenerateInvoicesReportExcelUs
 
         var workbook = new XLWorkbook();
 
-        workbook.Author = "Wellisson Arley";
+        workbook.Author = loggedUser.Name;
         workbook.Style.Font.FontSize = 12;
         workbook.Style.Font.FontName = "Times New Roman";
         

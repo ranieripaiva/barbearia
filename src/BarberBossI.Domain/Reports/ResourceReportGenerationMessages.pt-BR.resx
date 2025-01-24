@@ -150,7 +150,13 @@
   <data name="TOTAL_WON_IN" xml:space="preserve">
     <value>Total Ganho em {0}</value>
   </data>
-  <data name="EMAIL_INVALID" xml:space="preserve">
-    <value>O correio eletrónico é inválido.</value>
+  <data name="ELETRONIC_TRANSFER" xml:space="preserve">
+    <value>Transferencia Eletronica</value>
+  </data>
+  <data name="EXPENSES_FOR" xml:space="preserve">
+    <value>Despesas para</value>
+  </data>
+  <data name="TOTAL_SPENT_IN" xml:space="preserve">
+    <value>Total gasto em {0}</value>
   </data>
 </root>

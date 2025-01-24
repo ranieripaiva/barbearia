@@ -4,7 +4,6 @@ using BarberBossI.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberBossI.api.Controllers;
-
 [Route("api/[controller]")]
 [ApiController]
 public class LoginController : ControllerBase
@@ -14,10 +13,11 @@ public class LoginController : ControllerBase
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login(
         [FromServices] IDoLoginUseCase useCase,
-        [FromBody] RequestLoginJson request)
+        [FromBody] RequestLoginJson request
+        )
     {
-        var response = await useCase.Execute(request);
+        var response = await useCase.Execute( request );
 
-        return Ok(response);
+        return Ok(response );
     }
 }

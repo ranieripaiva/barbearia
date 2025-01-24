@@ -11,5 +11,9 @@ public class InvoiceValidator : AbstractValidator<RequestInvoiceJson>
         RuleFor(invoice => invoice.Amount).GreaterThan(0).WithMessage(ResourceErrorMessages.AMOUNT_MUST_BE_GREATER_THAN_ZERO);
         RuleFor(invoice => invoice.Date).LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ResourceErrorMessages.INVOICES_CANNOT_FOR_THE_FUTURE);
         RuleFor(invoice => invoice.PaymentType).IsInEnum().WithMessage(ResourceErrorMessages.PAYMENT_TYPE_INVALID);
+        /*RuleFor(invoice => invoice.Tags).ForEach(rule =>
+        {
+            rule.IsInEnum().WithMessage(ResourceErrorMessages.TAG_TYPE_NOT_SUPPORTED);
+        });*/
     }
 }

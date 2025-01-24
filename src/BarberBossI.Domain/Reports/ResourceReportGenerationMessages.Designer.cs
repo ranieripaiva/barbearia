@@ -49,78 +49,9 @@
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Amount.
-        /// </summary>
-        public static string AMOUNT {
+       public static string AMOUNT {
             get {
                 return ResourceManager.GetString("AMOUNT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Date.
-        /// </summary>
-        public static string DATE {
-            get {
-                return ResourceManager.GetString("DATE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Description.
-        /// </summary>
-        public static string DESCRIPTION {
-            get {
-                return ResourceManager.GetString("DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Payment Type.
-        /// </summary>
-        public static string PAYMENT_TYPE {
-            get {
-                return ResourceManager.GetString("PAYMENT_TYPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string TITLE {
-            get {
-                return ResourceManager.GetString("TITLE", resourceCulture);
-            }
-        }
-
-        public static object INVOICES_FOR {
-            get
-            {
-                return ResourceManager.GetString("INVOICES_FOR", resourceCulture);
-            }
-
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Debit Card.
-        /// </summary>
-        public static string DEBIT_CARD
-        {
-            get
-            {
-                return ResourceManager.GetString("DEBIT_CARD", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Credit Card.
-        /// </summary>
-        public static string CREDIT_CARD
-        {
-            get
-            {
-                return ResourceManager.GetString("CREDIT_CARD", resourceCulture);
             }
         }
 
@@ -132,6 +63,42 @@
             }
         }
 
+        public static string CREDIT_CARD
+        {
+            get
+            {
+                return ResourceManager.GetString("CREDIT_CARD", resourceCulture);
+            }
+        }
+
+        
+        public static string DATE {
+            get {
+                return ResourceManager.GetString("DATE", resourceCulture);
+            }
+        }
+
+        public static string DEBIT_CARD
+        {
+            get
+            {
+                return ResourceManager.GetString("DEBIT_CARD", resourceCulture);
+            }
+        }
+     
+        public static string DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DESCRIPTION", resourceCulture);
+            }
+        }
+        public static string ELETRONIC_TRANSFER
+        {
+            get
+            {
+                return ResourceManager.GetString("ELETRONIC_TRANSFER", resourceCulture);
+            }
+        }
+
         public static string PIX
         {
             get
@@ -140,14 +107,48 @@
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Total spent in {0}.
-        /// </summary>
+        public static string EXPENSES_FOR
+        {
+            get
+            {
+                return ResourceManager.GetString("EXPENSES_FOR", resourceCulture);
+            }
+        }
+
+        public static object INVOICES_FOR
+        {
+            get
+            {
+                return ResourceManager.GetString("INVOICES_FOR", resourceCulture);
+            }
+
+        }
+
+        public static string PAYMENT_TYPE {
+            get {
+                return ResourceManager.GetString("PAYMENT_TYPE", resourceCulture);
+            }
+        }        
+        
+        public static string TITLE {
+            get {
+                return ResourceManager.GetString("TITLE", resourceCulture);
+            }
+        }       
+                
         public static string TOTAL_WON_IN
         {
             get
             {
                 return ResourceManager.GetString("TOTAL_WON_IN", resourceCulture);
+            }
+        }
+        
+        public static string TOTAL_SPENT_IN
+        {
+            get
+            {
+                return ResourceManager.GetString("TOTAL_SPENT_IN", resourceCulture);
             }
         }
 

@@ -10,9 +10,11 @@ public static class PaymentTypeExtensions
         {
             PaymentType.Cash => ResourceReportGenerationMessages.CASH,
             PaymentType.CreditCard => ResourceReportGenerationMessages.CREDIT_CARD,
-            PaymentType.DebitCard => ResourceReportGenerationMessages.DEBIT_CARD,
+            PaymentType.DebitCard => ResourceReportGenerationMessages.DEBIT_CARD,            
+            PaymentType.EletronicTransfer => ResourceReportGenerationMessages.ELETRONIC_TRANSFER,
             PaymentType.Pix => ResourceReportGenerationMessages.PIX,
-            _ => string.Empty
+            _ => string.Empty,
+            
         };
     }
 }

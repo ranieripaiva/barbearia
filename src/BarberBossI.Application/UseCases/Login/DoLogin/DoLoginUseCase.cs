@@ -44,5 +44,4 @@ public class DoLoginUseCase : IDoLoginUseCase
             Token = _accessTokenGenerator.Generate(user)
         };
     }
-
 }

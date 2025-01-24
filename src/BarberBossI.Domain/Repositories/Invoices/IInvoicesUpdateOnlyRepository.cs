@@ -3,7 +3,7 @@
 namespace BarberBossI.Domain.Repositories.Invoices;
 public interface IInvoicesUpdateOnlyRepository
 {
-    Task<Invoice?> GetById(long id);
+    Task<Invoice?> GetById(Entities.User user, long id);
     void Update(Invoice invoice);
 }
 

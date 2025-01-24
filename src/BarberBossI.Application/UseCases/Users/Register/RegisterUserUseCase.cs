@@ -32,8 +32,8 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         _userReadOnlyRepository = userReadOnlyRepository;
         _userWriteOnlyRepository = userWriteOnlyRepository;
         _tokenGenerator = tokenGenerator;
-        _unitOfWork = unitOfWork;
-        
+        _unitOfWork = unitOfWork;        
+
     }
 
     public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)

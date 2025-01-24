@@ -3,6 +3,7 @@ using BarberBossI.Application.UseCases.Invoices.Reports.Pdf.Fonts;
 using BarberBossI.Domain.Extentions;
 using BarberBossI.Domain.Reports;
 using BarberBossI.Domain.Repositories.Invoices;
+using BarberBossI.Domain.Services.LoggedUser;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
@@ -15,25 +16,29 @@ public class GenerateInvoicesReportPdfUseCase : IGenerateInvoicesReportPdfUseCas
     private const string CURRENCY_SYMBOL = "R$";
     private const int HEIGHT_ROW_EXPENSE_TABLE = 25;
     private readonly IInvoicesReadOnlyRepository _repository;
+    private readonly ILoggedUser _loggedUser;
 
-    public GenerateInvoicesReportPdfUseCase(IInvoicesReadOnlyRepository repository)
+    public GenerateInvoicesReportPdfUseCase(IInvoicesReadOnlyRepository repository, ILoggedUser loggedUser)
     {
         _repository = repository;
+        _loggedUser = loggedUser;
 
         GlobalFontSettings.FontResolver = new InvoicesReportFontResolver();
     }
     public async Task<byte[]> Execute(DateOnly month)
     {
-        var invoices = await _repository.FilterByMonth(month);
+        var loggedUser = await _loggedUser.Get();
+
+        var invoices = await _repository.FilterByMonth(loggedUser, month);
         if (invoices.Count == 0)
         {
             return [];
         }
 
-        var document = CreateDocument(month);
+        var document = CreateDocument(loggedUser.Name, month);
         var page = CreatePage(document); 
 
-        CreateHeaderWithProfilePhotoAndName(page);
+        CreateHeaderWithProfilePhotoAndName(loggedUser.Name, page);
 
         var totalExpenses = invoices.Sum(expense => expense.Amount);
         CreateTotalSpentSection(page, month, totalExpenses);
@@ -75,6 +80,8 @@ public class GenerateInvoicesReportPdfUseCase : IGenerateInvoicesReportPdfUseCas
                 descriptionRow.Cells[0].MergeRight = 2;
                 descriptionRow.Cells[0].Format.LeftIndent = 20;
 
+                row.Cells[3].MergeDown = 1;
+
             }
             AddWhiteSpace(table);
 
@@ -86,12 +93,12 @@ public class GenerateInvoicesReportPdfUseCase : IGenerateInvoicesReportPdfUseCas
         return RenderDocument(document);
     }
 
-    private Document CreateDocument(DateOnly month)
+    private Document CreateDocument(string author, DateOnly month)
     {
         var document = new Document();
 
         document.Info.Title = $"{ResourceReportGenerationMessages.INVOICES_FOR} {month:Y}";
-        document.Info.Author = "Ranieri Paiva";
+        document.Info.Author = author;
 
         var style = document.Styles["Normal"];
         style!.Font.Name = FontHelper.RALEWAY_REGULAR;
@@ -112,7 +119,7 @@ public class GenerateInvoicesReportPdfUseCase : IGenerateInvoicesReportPdfUseCas
         return section;
     }
 
-    private void CreateHeaderWithProfilePhotoAndName(Section page)
+    private void CreateHeaderWithProfilePhotoAndName(string name,Section page)
     {
         var table = page.AddTable();
         table.AddColumn();
@@ -126,7 +133,7 @@ public class GenerateInvoicesReportPdfUseCase : IGenerateInvoicesReportPdfUseCas
 
         row.Cells[0].AddImage(pathFile);
 
-        row.Cells[1].AddParagraph("   BARBEARIA DO JOÃO");
+        row.Cells[1].AddParagraph($"   BARBEARIA DO JOÃO, user: {name}");
         row.Cells[1].Format.Font = new Font { Name = FontHelper.BEBASNEUE_REGULAR, Size = 25 };
         row.Cells[1].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Center;
 

@@ -4,6 +4,7 @@ using BarberBossI.Communication.Responses;
 using BarberBossI.Domain.Entities;
 using BarberBossI.Domain.Repositories;
 using BarberBossI.Domain.Repositories.Invoices;
+using BarberBossI.Domain.Services.LoggedUser;
 using BarberBossI.Exception.ExceptionsBase;
 
 namespace BarberBossI.Application.UseCases.Invoices.Register;
@@ -12,37 +13,35 @@ public class RegisterInvoiceUseCase : IRegisterInvoiceUseCase
     private readonly IInvoicesWriteOnlyRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ILoggedUser _loggedUser;
 
     public RegisterInvoiceUseCase(
         IInvoicesWriteOnlyRepository repository, 
         IUnitOfWork unitOfWork,
-        IMapper mapper)
+        IMapper mapper,
+        ILoggedUser loggedUser)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _loggedUser = loggedUser;
 
     }
 
     public async Task<ResponseRegisteredInvoiceJson> Execute(RequestInvoiceJson request)
     {
         Validate(request);
-        
-        var entity = _mapper.Map<Invoice>(request);
-        /*{
-            Amount = request.Amount,
-            Date = request.Date,
-            Description = request.Description,
-            Title = request.Title,
-            PaymentType = (Domain.Enums.PaymentType)request.PaymentType,
-        };*/
 
-        await _repository.Add(entity);
+        var loggedUser = await _loggedUser.Get();
+
+        var invoice = _mapper.Map<Invoice>(request);
+        invoice.UserId = loggedUser.Id;
+
+        await _repository.Add(invoice);
 
         await _unitOfWork.Commit();
 
-        //return new ResponseRegisteredInvoiceJson();
-        return _mapper.Map<ResponseRegisteredInvoiceJson>(entity);
+        return _mapper.Map<ResponseRegisteredInvoiceJson>(invoice);
     }
     private void Validate(RequestInvoiceJson request)
     {  

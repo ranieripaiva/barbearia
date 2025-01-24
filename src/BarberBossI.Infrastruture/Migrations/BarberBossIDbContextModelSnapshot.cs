@@ -56,6 +56,27 @@ namespace BarberBossI.Infrastruture.Migrations
                     b.ToTable("Invoices");
                 });
 
+            modelBuilder.Entity("BarberBossI.Domain.Entities.Tag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("InvoiceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("Tags", (string)null);
+                });
+
             modelBuilder.Entity("BarberBossI.Domain.Entities.User", b =>
                 {
                     b.Property<long>("Id")
@@ -85,7 +106,7 @@ namespace BarberBossI.Infrastruture.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BarberBossI.Domain.Entities.Invoice", b =>
@@ -97,6 +118,22 @@ namespace BarberBossI.Infrastruture.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BarberBossI.Domain.Entities.Tag", b =>
+                {
+                    b.HasOne("BarberBossI.Domain.Entities.Invoice", "Invoice")
+                        .WithMany("Tags")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+                });
+
+            modelBuilder.Entity("BarberBossI.Domain.Entities.Invoice", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

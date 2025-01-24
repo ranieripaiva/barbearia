@@ -1,6 +1,7 @@
 ﻿using BarberBossI.Domain.Entities;
 using BarberBossI.Domain.Repositories.Invoices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace BarberBossI.Infrastruture.DataAccess.Repositories;
 internal class InvoicesRepository : IInvoicesReadOnlyRepository, IInvoicesWriteOnlyRepository, IInvoicesUpdateOnlyRepository
@@ -10,43 +11,46 @@ internal class InvoicesRepository : IInvoicesReadOnlyRepository, IInvoicesWriteO
     {
         _dbContext = dbContext;
     }
-    public async Task Add(Invoice invoice)
+    public async Task Add(Invoice invoice) //ok
     {      
         await _dbContext.Invoices.AddAsync(invoice);
     }
 
-    public async Task<bool> Delete(long id)
+    //public async Task<bool> Delete(long id)
+    public async Task Delete(long id)
     {
-        var result = await _dbContext.Invoices.FirstOrDefaultAsync(invoice => invoice.Id == id);
-        if (result is null)
-        {
-            return false;
-        }
-
-        _dbContext.Invoices.Remove(result);
-
-        return true;
+        var result = await _dbContext.Invoices.FirstAsync(invoice => invoice.Id == id);
+        
+        _dbContext.Invoices.Remove(result!);
+                
     }
-    public async Task<List<Invoice>> GetAll()
+    public async Task<List<Invoice>> GetAll(User user)
     {
-        return await _dbContext.Invoices.AsNoTracking().ToListAsync();
+        //return await _dbContext.Invoices.AsNoTracking().ToListAsync();
+        return await _dbContext.Invoices.AsNoTracking().Where(invoice => invoice.UserId == user.Id).ToListAsync();
     }
 
-    async Task<Invoice?> IInvoicesReadOnlyRepository.GetById(long id)
+    async Task<Invoice?> IInvoicesReadOnlyRepository.GetById(User user, long id)
     {
-        return await _dbContext.Invoices.AsNoTracking().FirstOrDefaultAsync(invoice => invoice.Id == id);
+        return await GetFullInvoice()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(invoice => invoice.Id == id && invoice.UserId == user.Id);
+        //return await _dbContext.Invoices.AsNoTracking().FirstOrDefaultAsync(invoice => invoice.Id == id);
     }
 
-    async Task<Invoice?> IInvoicesUpdateOnlyRepository.GetById(long id)
+    async Task<Invoice?> IInvoicesUpdateOnlyRepository.GetById(User user, long id)
     {
-        return await _dbContext.Invoices.FirstOrDefaultAsync(invoice => invoice.Id == id);
+        return await GetFullInvoice()
+            .FirstOrDefaultAsync(invoice => invoice.Id == id && invoice.UserId == user.Id);
+        
+        //return await _dbContext.Invoices.FirstOrDefaultAsync(invoice => invoice.Id == id);
     }
     public void Update(Invoice invoice)
     {        
         _dbContext.Invoices.Update(invoice);
     }
 
-    public async Task<List<Invoice>> FilterByMonth(DateOnly date)
+    public async Task<List<Invoice>> FilterByMonth(User user, DateOnly date)
     {
         var startDate = new DateTime(year: date.Year, month: date.Month, day: 1).Date;
         var daysInMonth = DateTime.DaysInMonth(year: date.Year, month: date.Month);
@@ -60,4 +64,11 @@ internal class InvoicesRepository : IInvoicesReadOnlyRepository, IInvoicesWriteO
             .ThenBy(invoice => invoice.Title)
             .ToListAsync();
     }
+
+    private IIncludableQueryable<Invoice, ICollection<Tag>> GetFullInvoice()
+    {
+        return _dbContext.Invoices
+            .Include(invoice => invoice.Tags);
+    }
+
 }

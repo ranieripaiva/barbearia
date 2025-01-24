@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BarberBossI.Communication.Responses;
 using BarberBossI.Domain.Repositories.Invoices;
+using BarberBossI.Domain.Services.LoggedUser;
 using BarberBossI.Exception;
 using BarberBossI.Exception.ExceptionsBase;
 
@@ -9,16 +10,20 @@ public class GetInvoiceByIdUseCase : IGetInvoiceByIdUseCase
 {
     private readonly IInvoicesReadOnlyRepository _repository;
     private readonly IMapper _mapper;
+    private readonly ILoggedUser _loggedUser;
 
-    public GetInvoiceByIdUseCase(IInvoicesReadOnlyRepository repository, IMapper mapper)
+    public GetInvoiceByIdUseCase(IInvoicesReadOnlyRepository repository, IMapper mapper, ILoggedUser loggedUser)
     {
         _repository = repository;
         _mapper = mapper;
+        _loggedUser = loggedUser;
     }
 
     public async Task<ResponseInvoiceJson> Execute(long id)
     {
-        var result = await _repository.GetById(id);
+        var loggedUser = await _loggedUser.Get();
+
+        var result = await _repository.GetById(loggedUser, id);
 
         if(result is null)
         {
